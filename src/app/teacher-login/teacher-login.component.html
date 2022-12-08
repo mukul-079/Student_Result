@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <h3 class="navbar-brand">Result Management System</h3>
+    </div>
+    <div class="btn pull-right">
+        <a routerLink="/" class="btn btn-outline-success text-light mx-2">Home</a>
+    </div>
+</nav>
+
+<div class="container card bg-dark text-light" style="margin-top:10px; padding:75px;">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="was-validated">
+        <h1 style="margin-bottom:30px;">Teacher Login</h1>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="email">Email address:</label>
+            <div class="col-sm-10">
+                <input formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" maxlength="35" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter valid email address" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <span class="text-danger" *ngIf="loginForm.controls['email'].touched && loginForm.hasError('required','email')">
+                    <i>*Email ID field is mandatory</i>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="password">Password:</label>
+            <div class="col-sm-10">
+                <input formControlName="password" type="password" class="form-control" id="password" minlength="2" maxlength="10" placeholder="Password" required>
+                <span class="text-danger" *ngIf="loginForm.controls['password'].touched && loginForm.hasError('required','password')">
+                    <i>*Password field is mandatory</i>
+                </span>
+            </div>
+        </div><br>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+    </form>
+</div>

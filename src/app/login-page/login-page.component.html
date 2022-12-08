@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <h3 class="navbar-brand">Result Management System</h3>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row align-items-center vh-100">
+        <div class="col-6 mx-auto">
+            <div class="card shadow border">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <div class="text-center display-3"> Login As</div>
+                    <div>
+                        <button routerLink="../teacher-login" class="btn btn-lg btn-primary m-5">Teacher</button>
+                        <button routerLink="../student-login" class="btn btn-lg btn-primary m-5">Student</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<router-outlet></router-outlet>

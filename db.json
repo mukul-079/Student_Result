@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": 0,
+      "Roll": 1,
+      "Name": "Vipul Varshney",
+      "DOB": "2022-04-24",
+      "score": 100
+    }
+  ],
+  "login-Teacher": [
+    {
+      "email": "teacher@gmail.com",
+      "password": "teacher123"
+    },
+    {
+      "email": "mohan@gmail.com",
+      "password": "mohan123"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

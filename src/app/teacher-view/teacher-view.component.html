@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+      <h3 class="navbar-brand">Result Management System</h3>
+  </div>
+  <div class="btn pull-right">
+    <a class="btn btn-success text-light" (click)="clickAddstudent()" data-toggle="modal" data-target="#exampleModal">Add Record</a>
+    <a (click)="logout()" class="btn btn-outline-info text-light mx-2">Logout</a>
+  </div>
+</nav>
+
+<div class="card bg-dark m-4">
+    <h3 class="text-info" style="margin:25px;">Total Students : {{getCounter()}}</h3>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Roll No.</th>
+              <th scope="col">Name</th>
+              <th scope="col">Date Of Birth</th>
+              <th scope="col">Score</th>
+              <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of studentData">
+              <td>{{row.id}}</td>
+              <td>{{row.Roll}}</td>
+              <td>{{row.Name}}</td>
+              <td>{{row.DOB}}</td>
+              <td>{{row.score}}</td>
+              <td>
+                  <a (click)="onEdit(row)" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-warning">Edit</a>
+                  <a (click)="deleteStudent(row)" class="btn btn-outline-danger m-2">Delete</a>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 *ngIf="showAdd" class="modal-title" id="exampleModalLabel">Add Record</h5>
+          <h5 *ngIf="showUpdate" class="modal-title" id="exampleModalLabel">Edit Record</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formValue" class="was-validated">
+                <div class="form-group" *ngIf="showAdd">
+                  <label for="roll">Roll no.</label>
+                  <input type="number" formControlName="Roll" class="form-control" min="0" max="9999999999" id="roll" placeholder="Enter Valid Roll No." required>
+                  <span class="text-danger" *ngIf="formValue.controls['Roll'].touched && formValue.hasError('required','Roll')">
+                    <i>*Roll No. field is mandatory</i>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" formControlName="Name" class="form-control" id="name" placeholder="Enter Your Name" minlength="2" maxlength="25" required>
+                  <span class="text-danger" *ngIf="formValue.controls['Name'].touched && formValue.hasError('required','Name')">
+                    <i>*Name field is mandatory</i>
+                  </span>
+                </div>
+                <div class="form-group">
+                    <label for="DOB">Date Of Birth</label>
+                    <input type="date" formControlName="DOB" class="form-control" id="DOB" placeholder="Enter Date of Birth" required>
+                    <span class="text-danger" *ngIf="formValue.controls['DOB'].touched && formValue.hasError('required','DOB')">
+                      <i>*DOB field is mandatory</i>
+                    </span>
+                  </div>
+                <div class="form-group">
+                    <label for="score">Score</label>
+                    <input type="number" formControlName="score" min="0" max="1000" class="form-control" id="score" placeholder="Enter Marks" required>
+                    <span class="text-danger" *ngIf="formValue.controls['score'].touched && formValue.hasError('required','score')">
+                      <i>*Score field is mandatory</i>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postStudent()" class="btn btn-outline-primary" [disabled]="formValue.invalid">Add Record</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateStudent()" class="btn btn-outline-primary" [disabled]="formValue.invalid">Edit Record</button>
+        </div>
+      </div>
+    </div>
+</div>
